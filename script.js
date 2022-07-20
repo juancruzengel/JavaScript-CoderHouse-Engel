@@ -18,6 +18,49 @@
 // let primerNumero = parseFloat(prompt("Ingrese un numero"))
 // let segundoNumero = parseFloat(prompt("Ingrese otro numero"))
 
+window.addEventListener('load', ()=> {
+    const display = document.querySelector('.calculatordisplay')
+    const keypadButtons = document.getElementsByClassName('keypad-button')
+
+    const keypadButtonsArray = Array.from(keypadButtons)
+    
+    keypadButtonsArray.forEach( (button) => {
+        button.addEventListener('click', ()=> {
+           calculadora(button, display)
+        })
+    })
+});
+
+function calculadora(button, display) {
+    switch (button.innerHTML) {
+        case 'C':
+            borrar(display)
+            break;
+        case '=':
+            calcular(display)
+            break;
+        
+        default:
+            actualizar(display)
+            break;
+    }
+}
+
+function calcular(display) {
+    display.innerHTML = eval(display.innerHTML)
+}
+
+function actualizar(display, button) {
+    if (display.innerHTML == 0) {
+        display.innerHTML = ''
+    }
+    display.innerHTML += button.innerHTML
+}
+
+function borrar(display) {
+    display.innerHTML = 0
+}
+
 const sumar = (num1, num2) => num1 + num2
 const restar = (num1, num2) => num1 - num2
 const multiplicar = (num1, num2) => num1 * num2
